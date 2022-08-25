@@ -6,8 +6,9 @@ export default class SeetRow extends Component {
         let bookedChair = '';
         if(chair.daDat){
             bookedChair = 'gheDuocChon'
+            
         }
-        return <button className="ghe" key={index}>
+        return <button className={`ghe ${bookedChair}`} key={index}>
             {chair.soGhe}
         </button>
     })
@@ -16,6 +17,6 @@ export default class SeetRow extends Component {
   };
 
   render() {
-    return <span className="d-flex">{this.renderRow()}</span>;
+    return <div className="d-flex">{this.renderRow()}</div>;
   }
 }

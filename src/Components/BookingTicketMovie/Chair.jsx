@@ -5,27 +5,15 @@ import danhSachGheDat from "../../Data/danhSachGhe.json";
 import SeetRow from "./SeetRow";
 
 export default class Chair extends Component {
-  renderDetail = () => {
-    return danhSachGheDat.danhSachGhe.map((chair, index) => {
-      let bookedChair = "";
-      if (chair.daDat) {
-        bookedChair = "gheDuocChon";
-      }
-      return (
-        <button className="ghe" key={index}>
-          {chair.soGhe}
-        </button>
-      );
-    });
-  };
+  
   renderChair = () => {
     return danhSachGheDat.map((chair, index) => {
       return (
-        <div className="text-white d-flex" key={index} style={{ fontSize: 30 }}>
+        <div className="text-white text-left ml-5 mt-1" key={index} style={{ fontSize: 30}}>
+          <div className="d-flex">
           {chair.hang}
-          {this.renderDetail()}
-
-          {/* <SeetRow chair={chair}/>         */}
+          <SeetRow chair={chair}/>    
+          </div>    
         </div>
       );
     });
@@ -34,10 +22,12 @@ export default class Chair extends Component {
   render() {
     return (
       <div>
-        <h3 className="title">ĐẶT VÉ XEM PHIM CYBERLEARN.VN</h3>
-        <h4 className="text-center text-white">Màn hình</h4>
+        <h3 className="display-4 text-warning">ĐẶT VÉ XEM PHIM CYBERLEARN.VN</h3>
+        <h4 className="text-center text-white">Màn hình</h4>    
+        <div className="mt-2">
         <div className="screen"></div>
         {this.renderChair()}
+        </div>
       </div>
     );
   }
