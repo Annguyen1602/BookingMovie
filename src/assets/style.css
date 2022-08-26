@@ -30,7 +30,7 @@ h4{
 
 .rowNumber {
   /* font-size: 25px; */
-  width: 45px;
+  width: 55px;
   height: 35px;
   background: none;
   border: none;
@@ -75,6 +75,6 @@ h4{
 
   cursor: pointer;
   border-radius: 5px;
-  width: 45px;
+  width: 55px;
   height: 35px;
 }
