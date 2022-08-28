@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { BookedAction } from "../../redux/actions/BookingTicketAction";
 
 class SeetRow extends Component {
   renderRow = () => {
@@ -30,11 +31,11 @@ class SeetRow extends Component {
           className={`ghe ${bookedChair} ${cssBookedSeat}`}
           key={index}
           onClick={() => {
-            const action = {
-              type: "BOOKED",
-              payload: chair,
-            };
-            this.props.dispatch(action);
+            // const action = {
+            //   type: "BOOKED",
+            //   payload: chair,
+            // };
+            this.props.dispatch(BookedAction(chair));
           }}
         >
           {chair.soGhe}

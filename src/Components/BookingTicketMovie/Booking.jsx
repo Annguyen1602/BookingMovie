@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { DeleteTicket } from "../../redux/actions/BookingTicketAction";
 
 class Booking extends Component {
   renderCalc = () => {
@@ -13,11 +14,11 @@ class Booking extends Component {
               <button
                 className="btn btn-info bg-light"
                 onClick={() => {
-                  const action = {
-                    type: "DELETE",
-                    payload: ticket.soGhe,
-                  };
-                  this.props.dispatch(action);
+                  // const action = {
+                  //   type: "DELETE",
+                  //   payload: ticket.soGhe,
+                  // };
+                  this.props.dispatch(DeleteTicket(ticket));
                 }}
               >
                 {" "}

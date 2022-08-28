@@ -5,16 +5,16 @@ const stateDefault = {
 export const BookingTicketReducers = (state = stateDefault, action) => {
   switch (action.type) {
     case "BOOKED": {
-      let { payload } = action;
+      let { chair } = action;
 
       let updateList = [...state.listReseveredSeat];
       let index = updateList.findIndex(
-        (chair) => chair.soGhe === payload.soGhe
+        (chairNumber) => chairNumber.soGhe === chair.soGhe
       );
       if (index !== -1) {
         updateList.splice(index, 1);
       } else {
-        updateList.push(payload);
+        updateList.push(chair);
       }
       let totalTicket = updateList.reduce((total, ticket) => {
         return total + ticket.gia;
@@ -24,10 +24,10 @@ export const BookingTicketReducers = (state = stateDefault, action) => {
       return { ...state, totalTicket };
     }
     case "DELETE": {
-      let { payload } = action;
+      let { ticket } = action;
       let updateList = [...state.listReseveredSeat];
       let index = updateList.findIndex(
-        (chair) => chair.soGhe === payload.soGhe
+        (chair) => chair.soGhe === ticket.soGhe
       );
       if (index) {
         updateList.splice(index, 1);
