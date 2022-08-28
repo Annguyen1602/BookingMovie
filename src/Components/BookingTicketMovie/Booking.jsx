@@ -1,7 +1,34 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-export default class Booking extends Component {
+class Booking extends Component {
+  renderCalc = () => {
+    return this.props.listReseveredSeat.map((ticket, index) => {
+      return (
+        <tbody key={index}>
+          <tr className="text-warning">
+            <td className="border ">{ticket.soGhe}</td>
+            <td className="border ">{ticket.gia.toLocaleString()} VND</td>
+            <td className="text-center">
+              <button
+                className="btn btn-info bg-light"
+                onClick={() => {
+                  const action = {
+                    type: "DELETE",
+                    payload: ticket.soGhe,
+                  };
+                  this.props.dispatch(action);
+                }}
+              >
+                {" "}
+                Huỷ
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      );
+    });
+  };
   render() {
     return (
       <div>
@@ -13,28 +40,36 @@ export default class Booking extends Component {
           <button className="gheDangChon "></button>
           <span className="text-light ms-2">Ghế đang đặt</span>
           <br />
-          <button className="ghe" style={{marginLeft:0}}></button>
+          <button className="ghe" style={{ marginLeft: 0 }}></button>
           <span className="text-light ms-2">Ghế chưa đặt</span>
         </div>
         <div>
-          <table class="table text-light" border='2'>
+          <table class="table text-light" border="2">
             <thead>
               <tr>
                 <th className="border">Số ghế</th>
-                <th>Giá</th>
-                <th></th>
+                <th className="border">Giá</th>
+                <th>Xin chào</th>
               </tr>
             </thead>
-            
+            {this.renderCalc()}
+            <tfoot>
+              <tr className="text-warning">
+                <td></td>
+                <td className="border">Tổng tiền</td>
+                <td>{this.props.totalTicket?.toLocaleString()} VND</td>
+              </tr>
+            </tfoot>
           </table>
-          
-
         </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  listReseveredSeat: state.BookingTicketReducers.listReseveredSeat,
+  totalTicket: state.BookingTicketReducers.totalTicket,
+});
 
-// export default connect(mapStateToProps)(Booking)
+export default connect(mapStateToProps)(Booking);

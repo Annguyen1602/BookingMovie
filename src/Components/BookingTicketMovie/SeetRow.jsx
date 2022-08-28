@@ -1,17 +1,42 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
-export default class SeetRow extends Component {
+class SeetRow extends Component {
   renderRow = () => {
     return this.props.chair.danhSachGhe.map((chair, index) => {
       let bookedChair = "";
+      let disable = false;
       if (chair.daDat) {
         bookedChair = "gheDuocChon";
+        disable = true;
       }
+
+      //CSS ghế đang đặt
+      let cssBookedSeat = "";
+      let indexBooked = this.props.listReseveredSeat.findIndex(
+        (ticket) => ticket.soGhe === chair.soGhe
+      );
+      if (indexBooked !== -1) {
+        cssBookedSeat = "gheDangChon";
+      }
+
       if (this.props.chair.hang === "") {
         return <span className="rowNumber">{chair.soGhe}</span>;
       }
+
       return (
-        <button className={`ghe ${bookedChair}`} key={index}>
+        <button
+          disabled={disable}
+          className={`ghe ${bookedChair} ${cssBookedSeat}`}
+          key={index}
+          onClick={() => {
+            const action = {
+              type: "BOOKED",
+              payload: chair,
+            };
+            this.props.dispatch(action);
+          }}
+        >
           {chair.soGhe}
         </button>
       );
@@ -22,3 +47,11 @@ export default class SeetRow extends Component {
     return <div className="d-flex">{this.renderRow()}</div>;
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    listReseveredSeat: state.BookingTicketReducers.listReseveredSeat,
+  };
+};
+
+export default connect(mapStateToProps)(SeetRow);

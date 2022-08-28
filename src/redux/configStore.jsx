@@ -1,6 +1,9 @@
 import { combineReducers, createStore } from "redux";
+import { BookingTicketReducers } from "./reducers/BookingTicketReducer";
 
-const rootReducer = combineReducers({});
+const rootReducer = combineReducers({
+BookingTicketReducers
+});
 
 export const store = createStore(
   rootReducer,
